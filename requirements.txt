@@ -9,3 +9,6 @@ tqdm
 accelerate
 transformers
 onnx
+onnxruntime
+
+onnxruntime-gpu; sys_platform != "darwin"
