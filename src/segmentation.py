@@ -17,7 +17,7 @@ class Segmentation:
 def process_image(image: np.ndarray) -> Segmentation:
     """Segmentation"""
     height, width = image.shape[:2]
-    results = modelY(image, verbose=False)[0]
+    results = modelY(image, verbose=False)[0] 
 
     image_result = results.orig_img
     mask = results.masks.data.cpu().numpy()[0]

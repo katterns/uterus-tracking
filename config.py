@@ -8,8 +8,8 @@ from depth_anything_v2.metric_depth.depth_anything_v2.dpt import DepthAnythingV2
 from ultralytics import YOLO
 
 # model path
-model_path: Path = Path() / "assets" / "best_1105.onnx"
-modelY: YOLO = YOLO(model_path, task="segment")
+model_path: Path = Path() / "assets" / "best_1105.pt"
+modelY: YOLO = YOLO(model_path)
 
 # 3D object path
 object_path: Path = Path() / "assets" / "object_withcam.ply"
@@ -43,7 +43,7 @@ model_configs: dict[str, dict[str, Any]] = {
     'vitl': {'encoder': 'vitl', 'features': 256, 'out_channels': [256, 512, 1024, 1024]}
 }
 
-encoder: str = "vitb"  # or 'vitl', 'vits'
+encoder: str = "vits"  # or 'vitl', 'vitb'
 dataset: str = "hypersim"  # 'hypersim' for indoor, 'vkitti' for outdoor
 max_depth: float = 1.5  # 20 for indoor model, 80 for outdoor model
 
