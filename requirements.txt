@@ -8,3 +8,4 @@ probreg
 tqdm
 accelerate
 transformers
+onnx

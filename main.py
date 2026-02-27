@@ -1,14 +1,15 @@
 from pathlib import Path
 
 import cv2
+import numpy as np
 
 from config import modelD, object_path, fin_path
-from core.segmentation import process_image
-from core.transformation import get_camera_intrinsics, extract_point_cloud
-from core.deformation import load_source_cloud, non_rigid_deformation, create_mesh, drawing_mesh
+from src.segmentation import process_image
+from src.transformation import get_camera_intrinsics, extract_point_cloud
+from src.deformation import load_source_cloud, non_rigid_deformation, create_mesh, drawing_mesh
 
 
-def run_pipeline_on_frames(frames):
+def run_pipeline_on_frames(frames: list[np.ndarray]) -> list[np.ndarray]:
     if not frames:
         return []
 
@@ -16,7 +17,7 @@ def run_pipeline_on_frames(frames):
     seg0 = process_image(frames[0])
     xform, inv_xform = get_camera_intrinsics(seg0.image)
 
-    fin_img = []
+    fin_img: list[np.ndarray] = []
     for img in frames:
         seg = process_image(img)
         pcd = extract_point_cloud(modelD, seg.image, seg.mask, seg.bbox, inv_xform)
@@ -28,7 +29,7 @@ def run_pipeline_on_frames(frames):
 
 
 if __name__ == "__main__":
-    video_path = Path() / "video.avi"
+    video_path = Path() / "assets" / "video.avi"
     cap = __import__("cv2").VideoCapture(str(video_path))
     all_img = []
     while True:

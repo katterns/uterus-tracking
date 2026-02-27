@@ -1,3 +1,5 @@
 checkpoints/
 .venv
 *.mp4
+/output
+.DS_Store
